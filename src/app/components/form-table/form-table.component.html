@@ -1,0 +1,89 @@
+<div class="container">
+  <br />
+
+  <form
+    [formGroup]="filterForm"
+    novalidate
+    #form="ngForm"
+    (ngSubmit)="print()"
+    (change)="print()"
+  >
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="name"
+        formControlName="name"
+      />
+      <label for="name">Name</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        class="form-control"
+        name="emplyemenyDate"
+        placeholder="date"
+        type="date"
+        id="date"
+        formControlName="emplyemenyDate"
+      />
+      <label for="date">date</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <select
+        class="form-select"
+        id="departement"
+        formControlName="departement"
+        aria-label="Floating label select example"
+      >
+        <option>IT</option>
+        <option>Fainance</option>
+      </select>
+      <label for="departement">departement</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        class="form-control form-input"
+        name="salary"
+        id="salary"
+        placeholder="salary"
+        formControlName="salary"
+      />
+      <label for="salary">Salary</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <select
+        class="form-select"
+        id="experience"
+        formControlName="experience"
+        aria-label="Floating label select example"
+      >
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
+      <label for="experience">experience </label>
+    </div>
+
+    <button (click)="onClear()" class="btn btn-primary mb-3">Clear</button>
+  </form>
+  <table class="table table-bordered table-hover">
+    <thead class="table-primary" *ngIf="filters">
+      <th class="table-primary p-3" *ngFor="let fill of filters">
+        {{ fill }}
+      </th>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let emp of employees | filterTable : filterForm.value">
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.emplyemenyDate }}</td>
+        <td>{{ emp.departement }}</td>
+        <td>{{ emp.salary }}</td>
+        <td>{{ emp.experience }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
